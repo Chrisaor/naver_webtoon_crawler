@@ -12,7 +12,23 @@ class Webtoon:
         self.episode_list = list()
         self.html =  ''
 
-   
+    def get_html(self):
+        file_path = f'data/webtoon-{self.webtoon_id}.html'
+        address = 'https://comic.naver.com/webtoon/list.nhn?titleId=651673&weekday=wed'
+        params = {
+            'titleId': self.webtoon_id
+        }
+
+        if os.path.exists(file_path):
+            html = open(file_path, 'rt').read()
+        else:
+            response = requests.get(address, params)
+            html = response.text
+            open(file_path, 'wt').write(html)
+        self.html = html
+        return self.html
+
+
 class Episode:
     def __init__(self, webtoon):
         self.webtoon = webtoon
