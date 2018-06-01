@@ -13,12 +13,12 @@ class Webtoon:
         self.html =  ''
 
     def get_html(self):
+        print('get_html함수가 실행됨..', self.webtoon_id)
         file_path = f'data/webtoon-{self.webtoon_id}.html'
-        address = 'https://comic.naver.com/webtoon/list.nhn?titleId=651673&weekday=wed'
+        address = 'https://comic.naver.com/webtoon/list.nhn?'
         params = {
             'titleId': self.webtoon_id
         }
-
         if os.path.exists(file_path):
             html = open(file_path, 'rt').read()
         else:
@@ -35,7 +35,7 @@ class Webtoon:
         self.title = div_detail.select_one('h2').contents[0].strip()
         self.author = div_detail.select_one('h2 > span.wrt_nm').contents[0].strip()
         self.description = div_detail.select_one('p').contents[0].strip()
-        
+
 
 class Episode:
     def __init__(self, webtoon):
@@ -50,9 +50,3 @@ class EpisodeImage:
         self.file_path = None
 
 
-
-# if __name__ == '__main__':
-#     webtoon1 = Webtoon(651673)
-#     webtoon1.get_html()
-#     # print(webtoon1.html)
-#     print(webtoon1.set_info())

@@ -40,7 +40,13 @@ class SearchWebtoon:
 if __name__ == '__main__':
     print('안내) Ctrl+C로 종료합니다.')
     search_input = input('검색할 웹툰명을 입력해주세요 : ')
-    webtoon = SearchWebtoon()
-    webtoon.search_webtoon(search_input)
+    webtoon_find = SearchWebtoon()
+    webtoon_find.search_webtoon(search_input)
     choice_input = input('선택 : ')
+    print(f'웹툰 ID [{webtoon_find.webtoon_id_list[int(choice_input)-1]}]로 검색을 시작합니다.' )
+    webtoon1 = Webtoon(webtoon_find.webtoon_id_list[int(choice_input)-1])
+    webtoon1.get_html()
+    webtoon1.set_info()
+
+
 
