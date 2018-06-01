@@ -28,6 +28,14 @@ class Webtoon:
         self.html = html
         return self.html
 
+    def set_info(self):
+        html = self.html
+        soup = BeautifulSoup(html, 'lxml')
+        div_detail = soup.select_one('div.detail')
+        self.title = div_detail.select_one('h2').contents[0].strip()
+        self.author = div_detail.select_one('h2 > span.wrt_nm').contents[0].strip()
+        self.description = div_detail.select_one('p').contents[0].strip()
+        
 
 class Episode:
     def __init__(self, webtoon):
