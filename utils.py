@@ -128,7 +128,7 @@ class Episode:
         soup = BeautifulSoup(html, 'lxml')
         img_list = soup.select('div.wt_viewer > img')
 
-        episode_image = EpisodeImage(self.webtoon, self.title, img_list)
+        # episode_image = EpisodeImage(self.webtoon, self.title, img_list)
 
         return [img.get('src') for img in img_list]
 
@@ -172,6 +172,10 @@ class EpisodeImage:
     def set_episode_images(self):
         return
 
+
+
+webtoon1 = Webtoon(703845)
+webtoon1.get_html()
 
 
 
