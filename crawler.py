@@ -52,6 +52,10 @@ def search_main():
             webtoon1 = Webtoon(webtoon_find.webtoon_id_list[int(choice_input1)-1])
             webtoon1.get_html()
             webtoon1.set_info()
+            print(f'{webtoon1.title}')
+            print(f'    작가명 : {webtoon1.author}')
+            print(f'    설명 : {webtoon1.description}')
+            print(f'    총 연재회수 : {webtoon1.num_of_episodes}')
             return search_main()
 
         elif choice_input2 == '2':

@@ -45,6 +45,7 @@ class Webtoon:
         self.title = div_detail.select_one('h2').contents[0].strip()
         self.author = div_detail.select_one('h2 > span.wrt_nm').contents[0].strip()
         self.description = div_detail.select_one('p').get_text(strip=True, separator='\n')
+        self.number_pages = soup.select('div.page_wrap > a.page')[-1].get_text()
 
         html = self.html
         soup = BeautifulSoup(html, 'lxml')
@@ -61,14 +62,10 @@ class Webtoon:
             episode_list.append(self.no)
 
         self.num_of_episodes = episode_list[0]
-        print(f'{self.title}')
-        print(f'    작가명 : {self.author}')
-        print(f'    설명 : {self.description}')
-        print(f'    총 연재회수 : {self.num_of_episodes}')
+
 
     def crawl_episode_list(self):
-        soup = BeautifulSoup(self.html, 'lxml')
-        self.number_pages = soup.select_one('div.page_wrap > a').get_text(strip=True)
+
         episode_list = list()
         for number in range(1, int(self.number_pages)+1):
             self.get_html(number)
@@ -174,9 +171,10 @@ class EpisodeImage:
 
 
 
-webtoon1 = Webtoon(703845)
+webtoon1 = Webtoon(632342)
 webtoon1.get_html()
-
+webtoon1.set_info()
+webtoon1.crawl_episode_list()
 
 
 
