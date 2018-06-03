@@ -159,23 +159,6 @@ class Episode:
         open(file_path, 'wb').write(response.content)
 
 
-class EpisodeImage:
-    def __init__(self, webtoon, episode, url):
-        self.webtoon = webtoon
-        self.episode = episode
-        self.url = url
-        self.file_path = None
-
-    def set_episode_images(self):
-        return
-
-
-
-webtoon1 = Webtoon(632342)
-webtoon1.get_html()
-webtoon1.set_info()
-webtoon1.crawl_episode_list()
-
 
 
 

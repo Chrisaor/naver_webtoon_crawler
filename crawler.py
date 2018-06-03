@@ -1,7 +1,7 @@
 from itertools import count
 import requests
 from bs4 import BeautifulSoup
-from utils import Webtoon, Episode, EpisodeImage
+from utils import Webtoon
 
 class SearchWebtoon:
     def __init__(self):
@@ -59,7 +59,7 @@ def search_main():
             return search_main()
 
         elif choice_input2 == '2':
-            print('2번은 선택했습니다')
+            print('2번을 선택했습니다')
             webtoon1 = Webtoon(webtoon_find.webtoon_id_list[int(choice_input1)-1])
             webtoon1.get_html()
             webtoon1.set_info()
