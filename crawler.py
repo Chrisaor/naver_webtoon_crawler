@@ -27,7 +27,7 @@ class SearchWebtoon:
                 break
 
         if search_list:
-            for index, title, number in zip(count(),search_list, webtoon_id_list):
+            for index, title, number in zip(count(), search_list, webtoon_id_list):
                 print(f'{index+1}. {title} [{number}]')
 
         else:
@@ -35,13 +35,13 @@ class SearchWebtoon:
             search_input = input('검색할 웹툰명을 입력해주세요 : ')
             return self.search_webtoon(search_input)
 
+
 def search_main():
     search_input = input('검색할 웹툰명을 입력해주세요 : ')
     webtoon_find = SearchWebtoon()
     webtoon_find.search_webtoon(search_input)
     choice_input1 = input('선택 : ')
-    print(f'현재 "{webtoon_find.search_list[int(choice_input1)-1]}" 웹툰이 선택되어 있습니다.' )
-
+    print(f'현재 "{webtoon_find.search_list[int(choice_input1)-1]}" 웹툰이 선택되어 있습니다.')
     print('1. 웹툰 정보 보기')
     print('2. 웹툰 저장하기')
     print('3. 다른 웹툰 검색해서 선택하기')
@@ -56,18 +56,23 @@ def search_main():
 
         elif choice_input2 == '2':
             print('2번은 선택했습니다')
+            webtoon1 = Webtoon(webtoon_find.webtoon_id_list[int(choice_input1)-1])
+            webtoon1.get_html()
+            webtoon1.set_info()
+            print(f'웹툰 저장 시작 (총 {webtoon1.num_of_episodes}화)')
+            for episode in webtoon1.crawl_episode_list():
+                print(f'======{episode} 다운로드 중=====')
+                episode.download_all_images()
+            print('저장이 완료되었습니다.')
             return search_main()
 
-
         elif choice_input2 =='3':
-            print(choice_input2)
             print('3번을 선택했습니다')
             return search_main()
 
         else:
             print('다시 선택해주세요')
             choice_input2 = input('선택 : ')
-
 
 
 if __name__ == '__main__':
